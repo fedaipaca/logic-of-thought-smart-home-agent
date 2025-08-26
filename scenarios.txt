@@ -1,0 +1,191 @@
+Smart Home System - Logic-of-Thought Agent
+==========================================
+
+This project implements a logical agent for smart home automation using propositional logic and Logic-of-Thought approach for a college homework assignment.
+
+SYSTEM SPECIFICATIONS
+====================
+
+Time Configuration:
+- 24-hour time format
+- Daytime: 7:00 - 19:00
+- User wake-up time: 7:00
+
+DEVICES AND STATES
+==================
+
+Device 1: Lamp
+- On: lamp is fully illuminated
+- Off: lamp is completely off
+- Dimmed: lamp provides low-level lighting
+
+Device 2: Thermostat
+- Heating: actively warming the house
+- Cooling: actively cooling the house
+- Ventilation: circulating air without heating/cooling
+- Off: no temperature control active
+
+Device 3: Smart Security
+- Armed: security system is fully active, meaning: door and window are locked, all sensors are enabled.
+- Home Mode: security system is partially active, meaning: door and window are locked, sensors are disabled.
+- Disarmed: security system is inactive, meaning: door and window are unlocked, sensors are disabled.
+
+Device 4: Television
+- On: TV is powered on and displaying content
+- Off: TV is powered off
+
+Device 5: Curtains
+- Open: curtains are fully opened
+- Closed: curtains are fully closed
+
+
+INITIAL SYSTEM STATE
+===================
+
+All devices start in their default inactive states:
+- Thermostat: Off
+- Lamp: Off
+- Curtains: Closed
+- Television: Off
+- Smart Security: Disarmed
+
+
+PRE-DEFINED SYSTEM RULES
+========================
+
+Automatic Weather Response:
+- If weather is freezing and user is at home, thermostat will automatically switch to heating mode. User can manually set it to Cooling or Ventilation or Off.
+- If weather is cold and user is at home, thermostat remains off unless manually triggered to Cooling or Heating or Ventilation or Off. 
+- If weather is warm and user is at home, thermostat remains off unless manually triggered to Cooling or Heating or Ventilation or Off.
+- If weather is hot and user is at home, thermostat will automatically switch to cooling mode. User can manually set it to Heating or Ventilation or Off.
+
+Daylight and Light Control:
+- If it is daytime (7:00 - 19:00) and user is at home, lamp will be turned off automatically. User can manually turn it on or dim or off.
+
+Wake-up Routine:
+- If time is 7:00 and user is at home, then thermostat will be set to relevant temperature control based on weather conditions and curtains will be opened.
+
+
+SCENARIOS
+=========
+
+Scenario 1: 
+    Environment conditions: [basic request from user, no conditions required].
+    User input: "Set thermostat to ventilation."
+    Expected result: 
+        - Thermostat is Ventilation.
+
+Scenario 2: 
+    Environment conditions: [basic request from user, no conditions required].
+    User input: "Turn on the lights."
+    Expected result:
+        - Lamp is On.
+
+Scenario 3:
+    Environment conditions: [basic request from user, no conditions required].
+    User input: "It is too bright, dim the lights."
+    Expected result:
+        - Lamp is Dimmed.
+
+Scenario 4:
+    Environment conditions: [basic request from user, no conditions required].
+    User input: "Turn on the TV."
+    Expected result:
+        - Television is On.
+
+Scenario 5: 
+    Environment conditions: [basic request from user, no conditions required].
+    User input: "Turn off the TV."
+    Expected result:
+        - Television is Off.
+
+Scenario 6: 
+    Environment conditions: [basic request from user, no conditions required].
+    User input: "Lock the doors."
+    Expected result:
+        - Smart Security is Home Mode.
+
+Scenario 7: 
+    Environment conditions: Time is daytime, user is not at home.
+    User input: [no input required, automatic detection]
+    Expected result:
+        - Curtains are Closed.
+
+Scenario 8: 
+    Environment conditions: Weather is freezing, user is at home.
+    User input: [no input required, automatic detection]
+    Expected result:
+        - Thermostat is Heating.
+
+Scenario 9: 
+    Environment conditions: Weather is freezing, time is 7:00, user is at home.
+    User input: [no input required, automatic detection]
+    Expected result: 
+        - Thermostat is Heating.
+        - Lamp is Off.
+        - Curtains are Open.
+
+Scenario 10:
+    Environment conditions: user is at home.
+    User input: "I am leaving for work."
+    Expected result: 
+        - Thermostat is Off.
+        - Lamp is Off.
+        - Curtains are Closed.
+        - Television is Off.
+        - Smart Security is Armed.
+
+Scenario 11:
+    Environment conditions: Weather is warm, time is not daytime, user is at home.
+    User input: "I am home."
+    Expected result: 
+        - Lamp is On.
+        - Curtains are Closed.
+
+Scenario 12:
+    Environment conditions: Weather is hot, time is not daytime, user is at home.
+    User input: "I am home."
+    Expected result: 
+        - Thermostat is Cooling.
+        - Lamp is On.
+        - Curtains are Closed.
+
+Scenario 13:
+    Environment conditions: Weather is hot, time is not 7:00, it is daytime, user is at home.
+    User input: "I will work from home today."
+    Expected result: 
+        - Thermostat is Cooling.
+        - Lamp is Off.
+        - Curtains are Open.
+        - Television is Off.
+        - Smart Security is Home Mode.
+
+Scenario 14:
+    Environment conditions: Weather is warm, time is not daytime, user is at home.
+    User input: "I want to watch TV."
+    Expected result: 
+        - Television is On.
+        - Lamp is Dimmed.
+        - Curtains are Closed.
+        - Thermostat is Off.
+        - Smart Security is Home Mode.
+
+Scenario 15:
+    Environment conditions: Weather is warm, time is not daytime, user is at home.
+    User input: "Going to sleep."
+    Expected result: 
+        - Thermostat is Off.
+        - Lamp is Off.
+        - Curtains are Closed.
+        - Television is Off.
+        - Smart Security is Armed.
+
+Scenario 16:
+    Environment conditions: Weather is freezing, time is not daytime, user is at home.
+    User input: "I want to watch a movie."
+    Expected result:
+        - Thermostat is Heating.
+        - Lamp is Off.
+        - Curtains are Closed.
+        - Television is On.
+        - Smart Security is Home Mode.
